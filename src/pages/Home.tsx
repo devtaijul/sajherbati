@@ -1,17 +1,11 @@
 import CategoryList from "@/components/home/CategoryList";
 import HeroSlider from "@/components/home/HeroSlider";
-import ProductSection from "@/components/home/ProductSection";
 import { NewProductServer } from "@/components/server/NewProductServer";
 import { TopSellsProductServer } from "@/components/server/TopSellsProductServer";
 import ProductSectionSkeleton from "@/components/skeleton/ProductSectionSkeleton";
-import { getFeaturedProducts, getTopSellingProducts } from "@/data/products";
 import { Suspense } from "react";
 
 export const Home = () => {
-  const topSelling = getTopSellingProducts();
-
-  const featured = getFeaturedProducts();
-
   return (
     <main>
       <HeroSlider />

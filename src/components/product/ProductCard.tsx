@@ -4,6 +4,9 @@ import { Heart, ShoppingBag, Eye } from "lucide-react";
 import { Product } from "@/types/product";
 import { useCartContext } from "@/contexts/CartContext";
 import Link from "next/link";
+import { PAGES } from "@/config/page";
+import Image from "next/image";
+import { PLACEHOLDER_IMAGE } from "@/config/image";
 
 interface ProductCardProps {
   product: Product;
@@ -43,12 +46,21 @@ const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   return (
-    <Link href={`/product/${product.id}`} className="card-product group block">
+    <Link
+      href={PAGES.PRODUCT.VIEW(product.slug)}
+      className="card-product group block"
+    >
       <div className="relative aspect-[3/4] overflow-hidden">
-        <img
-          src={product.featuredImage.url}
+        <Image
+          src={
+            product.featuredImageId
+              ? product.featuredImage.url
+              : PLACEHOLDER_IMAGE.PRODUCT
+          }
           alt={product.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          width={400}
+          height={600}
         />
 
         {/* Badges */}

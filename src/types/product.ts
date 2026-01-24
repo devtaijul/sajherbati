@@ -1,4 +1,3 @@
-import { getFeaturedProducts } from "./../data/products";
 export interface ProductImage {
   id: string;
   url: string;
@@ -8,6 +7,7 @@ export interface ProductImage {
 
 export interface Product {
   id: string;
+  slug: string;
   title: string;
   categoryId: string;
   stitchType: "STITCH" | "UNSTITCH";
@@ -31,6 +31,7 @@ export interface Product {
   instruction: string;
   videoUrl: string;
   liveLink: string;
+  featuredImageId: string;
   featuredImage: Media;
   galleryImages: Media[];
   attachProduct: Product | null;
@@ -40,7 +41,7 @@ export interface Product {
   updatedAt: string;
 }
 
-type Media = {
+export type Media = {
   url: string;
   id: string;
   filename: string;
