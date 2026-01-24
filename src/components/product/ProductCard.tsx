@@ -50,7 +50,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       href={PAGES.PRODUCT.VIEW(product.slug)}
       className="card-product group block"
     >
-      <div className="relative aspect-[3/4] overflow-hidden">
+      <div className="relative aspect-3/4 overflow-hidden">
         <Image
           src={
             product.featuredImageId
@@ -87,7 +87,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </button>
 
         {/* Quick actions */}
-        <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-foreground/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute bottom-0 left-0 right-0 p-3 bg-linear-to-t from-foreground/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div className="flex gap-2">
             <button
               onClick={handleQuickAdd}

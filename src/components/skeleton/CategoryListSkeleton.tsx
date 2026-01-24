@@ -1,4 +1,3 @@
-import React from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export const CategoryListSkeleton = () => {
@@ -16,13 +15,13 @@ export const CategoryListSkeleton = () => {
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={index}
-              className="relative overflow-hidden rounded-xl aspect-[3/4]"
+              className="relative overflow-hidden rounded-xl aspect-3/4"
             >
               {/* Image placeholder */}
               <Skeleton className="absolute inset-0" />
 
               {/* Gradient overlay mimic */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/40 via-black/10 to-transparent" />
 
               {/* Text skeleton */}
               <div className="absolute bottom-0 left-0 right-0 p-4 space-y-2">

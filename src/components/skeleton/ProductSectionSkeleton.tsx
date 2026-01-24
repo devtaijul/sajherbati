@@ -1,4 +1,3 @@
-import React from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const ProductSectionSkeleton = () => {
@@ -21,7 +20,7 @@ const ProductSectionSkeleton = () => {
           {Array.from({ length: 4 }).map((_, index) => (
             <div key={index} className="space-y-3">
               {/* Image */}
-              <Skeleton className="aspect-[3/4] rounded-xl" />
+              <Skeleton className="aspect-3/4 rounded-xl" />
 
               {/* Title */}
               <Skeleton className="h-4 w-3/4" />

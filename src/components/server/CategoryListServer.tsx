@@ -41,7 +41,7 @@ export const CategoryListServer = async () => {
             <Link
               key={category.id}
               href={`/shop?category=${category.slug}`}
-              className="group relative overflow-hidden rounded-xl aspect-[3/4] animate-fade-in"
+              className="group relative overflow-hidden rounded-xl aspect-3/4 animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <Image
@@ -55,7 +55,7 @@ export const CategoryListServer = async () => {
                 width={400}
                 height={600}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-foreground/80 via-foreground/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4 text-center">
                 <h3 className="font-display text-lg md:text-xl font-semibold text-card">
                   {category.title}

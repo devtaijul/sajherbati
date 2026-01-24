@@ -2,6 +2,7 @@
 import { getProductById } from "@/actions/query.actions";
 import { notFound } from "next/navigation";
 import ProductDetailClient from "../ProductDetailClient";
+import RelatedProducts from "../RelatedProducts";
 
 interface PageProps {
   slug: string;
@@ -20,7 +21,7 @@ export const ProductDetailsServer = async ({ slug }: PageProps) => {
   return (
     <>
       <ProductDetailClient product={product.data} />
-      {/* <RelatedProducts products={relatedProducts} /> */}
+      <RelatedProducts products={product.relatedProducts} />
     </>
   );
 };

@@ -181,13 +181,13 @@ export default function ProductActions({
         {product.kamizLong && (
           <div>
             <span className="text-sm text-muted-foreground">Kamiz Length</span>
-            <p className="font-medium">{product.kamizLong}"</p>
+            <p className="font-medium">{product.kamizLong}&ldquo;</p>
           </div>
         )}
         {product.pantLong && (
           <div>
             <span className="text-sm text-muted-foreground">Pant Length</span>
-            <p className="font-medium">{product.pantLong}"</p>
+            <p className="font-medium">{product.pantLong}&ldquo;</p>
           </div>
         )}
         {product.body && (
