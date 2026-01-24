@@ -36,7 +36,7 @@ const ProductSection = ({
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {products.slice(0, 4).map((product, index) => (
+          {products.map((product, index) => (
             <div
               key={product.id}
               className="animate-slide-up"

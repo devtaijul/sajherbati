@@ -1,15 +1,15 @@
-import HeroSlider from "@/components/home/HeroSlider";
 import CategoryList from "@/components/home/CategoryList";
+import HeroSlider from "@/components/home/HeroSlider";
 import ProductSection from "@/components/home/ProductSection";
-import {
-  getTopSellingProducts,
-  getNewArrivals,
-  getFeaturedProducts,
-} from "@/data/products";
+import { NewProductServer } from "@/components/server/NewProductServer";
+import { TopSellsProductServer } from "@/components/server/TopSellsProductServer";
+import ProductSectionSkeleton from "@/components/skeleton/ProductSectionSkeleton";
+import { getFeaturedProducts, getTopSellingProducts } from "@/data/products";
+import { Suspense } from "react";
 
 export const Home = () => {
   const topSelling = getTopSellingProducts();
-  const newArrivals = getNewArrivals();
+
   const featured = getFeaturedProducts();
 
   return (
@@ -18,28 +18,15 @@ export const Home = () => {
 
       <CategoryList />
 
-      <ProductSection
-        title="New Arrivals"
-        subtitle="Latest Collection"
-        products={newArrivals}
-        viewAllLink="/shop?filter=new"
-      />
+      <Suspense fallback={<ProductSectionSkeleton />}>
+        <NewProductServer />
+      </Suspense>
 
       <div className="bg-muted/30">
-        <ProductSection
-          title="Best Sellers"
-          subtitle="Our Popular Products"
-          products={topSelling}
-          viewAllLink="/shop?filter=top-selling"
-        />
+        <Suspense fallback={<ProductSectionSkeleton />}>
+          <TopSellsProductServer />
+        </Suspense>
       </div>
-
-      <ProductSection
-        title="Featured Products"
-        subtitle="Handpicked Collection"
-        products={featured}
-        viewAllLink="/shop"
-      />
 
       {/* Features Section */}
       <section className="py-12 md:py-16 bg-primary text-primary-foreground">

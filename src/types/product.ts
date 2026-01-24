@@ -1,3 +1,4 @@
+import { getFeaturedProducts } from "./../data/products";
 export interface ProductImage {
   id: string;
   url: string;
@@ -9,7 +10,7 @@ export interface Product {
   id: string;
   title: string;
   categoryId: string;
-  stitchType: 'STITCH' | 'UNSTITCH';
+  stitchType: "STITCH" | "UNSTITCH";
   sizes: string[];
   regularPrice: number;
   price: number;
@@ -30,8 +31,8 @@ export interface Product {
   instruction: string;
   videoUrl: string;
   liveLink: string;
-  featuredImage: ProductImage;
-  galleryImages: ProductImage[];
+  featuredImage: Media;
+  galleryImages: Media[];
   attachProduct: Product | null;
   attachProductId: string | null;
   relatedProducts: Product[];
@@ -39,12 +40,31 @@ export interface Product {
   updatedAt: string;
 }
 
+type Media = {
+  url: string;
+  id: string;
+  filename: string;
+  mimeType: string;
+  size: number;
+  width: number | null;
+  height: number | null;
+  altText: string | null;
+  caption: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+  productId: string | null;
+};
+
 export interface Category {
   id: string;
-  name: string;
+  title: string;
   slug: string;
   image: string;
   productCount: number;
+  createdAt: string;
+  updatedAt: string;
+  featuredImageId: string;
+  featuredImage: Media;
 }
 
 export interface CartItem {
@@ -56,7 +76,7 @@ export interface CartItem {
   size: string;
   quantity: number;
   image: string;
-  stitchType: 'STITCH' | 'UNSTITCH';
+  stitchType: "STITCH" | "UNSTITCH";
 }
 
 export interface Order {
@@ -71,7 +91,13 @@ export interface Order {
   subtotal: number;
   deliveryCharge: number;
   total: number;
-  status: 'pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  status:
+    | "pending"
+    | "confirmed"
+    | "processing"
+    | "shipped"
+    | "delivered"
+    | "cancelled";
   createdAt: string;
 }
 
