@@ -41,6 +41,56 @@ export interface Product {
   updatedAt: string;
 }
 
+export type StitchType = "STITCH" | "UNSTITCH";
+
+export type OrderItems = {
+  id: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  title: string;
+  image: string;
+  price: number;
+  quantity: number;
+  productId: string;
+  size: string;
+  stitchType: StitchType;
+  orderId?: string;
+};
+
+export type PaymentMethod = "CASH_ON_DELIVERY" | "BKASH";
+
+export type Order = {
+  id: string;
+  name: string;
+  phone: string;
+  address: string;
+  trackingNumber: string;
+  paymentMethod: PaymentMethod;
+  deliveryArea: string;
+  subtotal: number;
+  deliveryCharge: number;
+  orderItems: OrderItems[];
+  status: orderStatus;
+  total: number;
+  note: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type OrderCreate = {
+  name: string;
+  phone: string;
+  address: string;
+  paymentMethod: PaymentMethod;
+  deliveryArea: string;
+  subtotal: number;
+  deliveryCharge: number;
+  orderItems: OrderItems[];
+  status?: orderStatus;
+  total: number;
+  note: string | null;
+};
+
 export type Media = {
   url: string;
   id: string;
@@ -73,34 +123,19 @@ export interface CartItem {
   productId: string;
   title: string;
   price: number;
-  regularPrice: number;
   size: string;
   quantity: number;
   image: string;
   stitchType: "STITCH" | "UNSTITCH";
 }
 
-export interface Order {
-  id: string;
-  trackingNumber: string;
-  customerName: string;
-  customerPhone: string;
-  customerAddress: string;
-  deliveryArea: string;
-  note: string;
-  items: CartItem[];
-  subtotal: number;
-  deliveryCharge: number;
-  total: number;
-  status:
-    | "pending"
-    | "confirmed"
-    | "processing"
-    | "shipped"
-    | "delivered"
-    | "cancelled";
-  createdAt: string;
-}
+export type orderStatus =
+  | "PENDING"
+  | "CONFIRMED"
+  | "PROCESSING"
+  | "SHIPPED"
+  | "DELIVERED"
+  | "CANCELLED";
 
 export interface DeliveryArea {
   id: string;

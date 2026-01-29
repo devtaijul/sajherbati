@@ -2,6 +2,7 @@ import { ENV_SERVER } from "@/lib/env";
 
 export const getParentCategories = async () => {
   const res = await fetch(`${ENV_SERVER.API_URL}/category/parent`);
+
   return res.json();
 };
 export const getSpecialProducts = async (type: "new" | "top" = "top") => {
@@ -11,5 +12,10 @@ export const getSpecialProducts = async (type: "new" | "top" = "top") => {
 
 export const getProductById = async (slug: string) => {
   const res = await fetch(`${ENV_SERVER.API_URL}/product/${slug}`);
+  return res.json();
+};
+
+export const getFlatCategories = async () => {
+  const res = await fetch(`${ENV_SERVER.API_URL}/category/flat`);
   return res.json();
 };

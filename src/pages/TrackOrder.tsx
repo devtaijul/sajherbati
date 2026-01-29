@@ -1,28 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { trackOrder } from "@/actions/mutation.actions";
+import { Button } from "@/components/ui/button";
+import { useAsyncAction } from "@/hooks/use-async-action";
+import { Order } from "@/types/product";
 import {
-  Search,
-  Package,
-  Clock,
-  Truck,
   CheckCircle,
+  Clock,
+  Package,
+  Search,
+  Truck,
   XCircle,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useCartContext } from "@/contexts/CartContext";
-import { Order } from "@/types/product";
+import Image from "next/image";
+import { useState } from "react";
 
 const statusSteps = [
-  { key: "pending", label: "Pending", icon: Clock },
-  { key: "confirmed", label: "Confirmed", icon: Package },
-  { key: "processing", label: "Processing", icon: Package },
-  { key: "shipped", label: "Shipped", icon: Truck },
-  { key: "delivered", label: "Delivered", icon: CheckCircle },
+  { key: "PENDING", label: "Pending", icon: Clock },
+  { key: "CONFIRMED", label: "Confirmed", icon: Package },
+  { key: "PROCESSING", label: "Processing", icon: Package },
+  { key: "SHIPPED", label: "Shipped", icon: Truck },
+  { key: "DELIVERED ", label: "Delivered", icon: CheckCircle },
 ];
 
 const TrackOrder = () => {
-  const { getOrderByTracking, getOrdersByPhone } = useCartContext();
   const [searchType, setSearchType] = useState<"tracking" | "phone">(
     "tracking",
   );
@@ -30,21 +31,30 @@ const TrackOrder = () => {
   const [foundOrders, setFoundOrders] = useState<Order[]>([]);
   const [searched, setSearched] = useState(false);
 
-  const handleSearch = (e: React.FormEvent) => {
+  console.log("foundOrders", foundOrders);
+
+  const { runAction, isProcessing } = useAsyncAction(trackOrder, {
+    onSuccess: (data) => {
+      setFoundOrders(data.data);
+    },
+    onError: () => {
+      setFoundOrders([]);
+    },
+  });
+
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     setSearched(true);
 
     if (searchType === "tracking") {
-      const order = getOrderByTracking(searchQuery.trim());
-      setFoundOrders(order ? [order] : []);
+      await runAction(searchQuery.trim());
     } else {
-      const orders = getOrdersByPhone(searchQuery.trim());
-      setFoundOrders(orders);
+      await runAction(searchQuery.trim());
     }
   };
 
   const getStatusIndex = (status: Order["status"]) => {
-    if (status === "cancelled") return -1;
+    if (status === "CANCELLED") return -1;
     return statusSteps.findIndex((s) => s.key === status);
   };
 
@@ -88,6 +98,7 @@ const TrackOrder = () => {
           <form onSubmit={handleSearch} className="flex gap-3">
             <input
               type="text"
+              key={searchType === "tracking" ? "tracking" : "phone"}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={
@@ -97,9 +108,13 @@ const TrackOrder = () => {
               }
               className="input-field flex-1"
             />
-            <Button type="submit" className="btn-primary px-6">
+            <Button
+              type="submit"
+              disabled={isProcessing}
+              className="btn-primary px-6"
+            >
               <Search size={18} className="mr-2" />
-              Search
+              {isProcessing ? "Searching..." : "Search"}
             </Button>
           </form>
         </div>
@@ -146,7 +161,7 @@ const TrackOrder = () => {
                     </div>
 
                     {/* Status Progress */}
-                    {order.status !== "cancelled" ? (
+                    {order.status !== "CANCELLED" ? (
                       <div className="mb-6">
                         <div className="flex items-center justify-between relative">
                           <div className="absolute top-5 left-0 right-0 h-1 bg-muted" />
@@ -219,18 +234,20 @@ const TrackOrder = () => {
                     {/* Items */}
                     <div className="border-t border-border pt-4">
                       <p className="text-sm text-muted-foreground mb-3">
-                        Order Items ({order.items.length})
+                        Order Items ({order.orderItems.length})
                       </p>
                       <div className="space-y-2">
-                        {order.items.map((item) => (
+                        {order.orderItems.map((item) => (
                           <div
                             key={item.id}
                             className="flex items-center gap-3"
                           >
-                            <img
+                            <Image
                               src={item.image}
                               alt={item.title}
                               className="w-12 h-14 object-cover rounded"
+                              width={500}
+                              height={500}
                             />
                             <div className="flex-1">
                               <p className="font-medium text-sm">

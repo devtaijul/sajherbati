@@ -36,6 +36,11 @@ export default function ProductActions({
   onBuyNow: () => void;
   onToggleFavorite: () => void;
 }) {
+  console.log(
+    "product.attachProduct.featuredImage?.url",
+    product.attachProduct,
+  );
+
   return (
     <div className="space-y-6">
       {/* Title & Price */}
@@ -44,10 +49,10 @@ export default function ProductActions({
           {product.newArrival && <span className="badge-new">New</span>}
           {/*  {discount > 0 && <span className="badge-sale">-{discount}%</span>} */}
         </div>
-        <h1 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+        <h1 className="text-2xl font-bold md:text-3xl font-display text-foreground">
           {product.title}
         </h1>
-        <p className="text-muted-foreground mt-1">
+        <p className="mt-1 text-muted-foreground">
           {product.stitchType === "STITCH" ? "Stitched" : "Unstitched"} | SKU:{" "}
           {product.sku}
         </p>
@@ -56,7 +61,7 @@ export default function ProductActions({
             ৳{product.price}
           </span>
           {product.regularPrice > 0 && (
-            <span className="text-xl text-muted-foreground line-through">
+            <span className="text-xl line-through text-muted-foreground">
               ৳{product.regularPrice}
             </span>
           )}
@@ -68,10 +73,10 @@ export default function ProductActions({
         {product.inStock ? (
           <>
             <Check size={18} className="text-success" />
-            <span className="text-success font-medium">In Stock</span>
+            <span className="font-medium text-success">In Stock</span>
           </>
         ) : (
-          <span className="text-destructive font-medium">Out of Stock</span>
+          <span className="font-medium text-destructive">Out of Stock</span>
         )}
       </div>
 
@@ -93,20 +98,20 @@ export default function ProductActions({
 
       {/* Quantity */}
       <div>
-        <h3 className="font-medium mb-3">Quantity</h3>
+        <h3 className="mb-3 font-medium">Quantity</h3>
         <div className="flex items-center gap-3">
           <button
             onClick={() => setQuantity(Math.max(1, quantity - 1))}
-            className="p-2 border border-border rounded-lg hover:bg-muted transition-colors"
+            className="p-2 transition-colors border rounded-lg border-border hover:bg-muted"
           >
             <Minus size={18} />
           </button>
-          <span className="w-12 text-center font-medium text-lg">
+          <span className="w-12 text-lg font-medium text-center">
             {quantity}
           </span>
           <button
             onClick={() => setQuantity(quantity + 1)}
-            className="p-2 border border-border rounded-lg hover:bg-muted transition-colors"
+            className="p-2 transition-colors border rounded-lg border-border hover:bg-muted"
           >
             <Plus size={18} />
           </button>
@@ -129,8 +134,8 @@ export default function ProductActions({
 
       {/* Attached Product */}
       {product.attachProduct && (
-        <div className="p-4 bg-secondary/30 rounded-xl border border-secondary">
-          <h3 className="font-medium mb-3 flex items-center gap-2">
+        <div className="p-4 border bg-secondary/30 rounded-xl border-secondary">
+          <h3 className="flex items-center gap-2 mb-3 font-medium">
             <span className="text-lg">✨</span>
             Stitched Version of This Product
           </h3>
@@ -140,17 +145,17 @@ export default function ProductActions({
           >
             <Image
               src={
-                product.attachProductId
+                product.attachProduct.featuredImageId
                   ? product.attachProduct.featuredImage?.url
                   : PLACEHOLDER_IMAGE.PRODUCT
               }
               alt={product.attachProduct.title}
-              className="w-20 h-24 object-cover rounded-lg"
+              className="object-cover w-20 h-24 rounded-lg"
               width={500}
               height={500}
             />
             <div className="flex-1">
-              <p className="font-medium group-hover:text-primary transition-colors">
+              <p className="font-medium transition-colors group-hover:text-primary">
                 {product.attachProduct.title}
               </p>
               <p className="text-sm text-muted-foreground">
@@ -158,7 +163,7 @@ export default function ProductActions({
                   ? "Stitched"
                   : "Unstitched"}
               </p>
-              <p className="font-bold text-accent mt-1">
+              <p className="mt-1 font-bold text-accent">
                 ৳{product.attachProduct.price}
               </p>
             </div>
@@ -169,9 +174,9 @@ export default function ProductActions({
 
       {/* Description */}
       <div>
-        <h3 className="font-display font-semibold text-lg mb-3">Description</h3>
+        <h3 className="mb-3 text-lg font-semibold font-display">Description</h3>
         <div
-          className="prose prose-sm max-w-none text-muted-foreground"
+          className="prose-sm prose max-w-none text-muted-foreground"
           dangerouslySetInnerHTML={{ __html: product.description }}
         />
       </div>
@@ -205,11 +210,11 @@ export default function ProductActions({
       {/* Instructions */}
       {product.instruction && (
         <div>
-          <h3 className="font-display font-semibold text-lg mb-3">
+          <h3 className="mb-3 text-lg font-semibold font-display">
             Care Instructions
           </h3>
           <div
-            className="prose prose-sm max-w-none text-muted-foreground"
+            className="prose-sm prose max-w-none text-muted-foreground"
             dangerouslySetInnerHTML={{ __html: product.instruction }}
           />
         </div>

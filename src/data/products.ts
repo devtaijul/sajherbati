@@ -32,8 +32,9 @@ export const categories: Category[] = [
 ];
 
 export const deliveryAreas: DeliveryArea[] = [
-  { id: "dhaka-inside", name: "Inside Dhaka", charge: 70 },
-  { id: "dhaka-outside", name: "Outside Dhaka", charge: 130 },
+  { id: "dhaka-inside", name: "Inside Dhaka", charge: 80 },
+  { id: "dhaka-suburb", name: "Suburb Dhaka", charge: 100 },
+  { id: "dhaka-outside", name: "Outside Dhaka", charge: 150 },
 ];
 
 export const products: Product[] = [
