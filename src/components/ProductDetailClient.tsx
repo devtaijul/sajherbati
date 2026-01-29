@@ -3,16 +3,17 @@
 import { useCartContext } from "@/contexts/CartContext";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { toast } from "sonner";
 
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import ProductActions from "./ProductActions";
 import ProductGallery from "./ProductGallery";
 import { Product } from "@/types/product";
+import { useToast } from "@/hooks/use-toast";
 
 export default function ProductDetailClient({ product }: { product: Product }) {
   const router = useRouter();
+  const { toast } = useToast();
   const { addToCart, toggleFavorite, isFavorite } = useCartContext();
 
   const [selectedSize, setSelectedSize] = useState("");
@@ -26,7 +27,10 @@ export default function ProductDetailClient({ product }: { product: Product }) {
       product.sizes.length > 0 &&
       !selectedSize
     ) {
-      toast.error("Please select a size");
+      toast({
+        title: "Please select a size",
+        description: "You can find the size on the product page.",
+      });
       return;
     }
 
@@ -40,7 +44,10 @@ export default function ProductDetailClient({ product }: { product: Product }) {
       stitchType: product.stitchType,
     });
 
-    toast.success("Added to cart!");
+    toast({
+      title: "Added to cart!",
+      description: "You can find your cart on the cart page.",
+    });
   };
 
   const handleBuyNow = () => {
@@ -52,7 +59,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
     <main className="py-8 md:py-12">
       <div className="container-custom">
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm mb-8">
+        <nav className="flex items-center gap-2 mb-8 text-sm">
           <Link href="/" className="text-muted-foreground">
             Home
           </Link>
@@ -64,7 +71,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
           <span className="font-medium">{product.title}</span>
         </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
           <ProductGallery product={product} />
 
           <ProductActions

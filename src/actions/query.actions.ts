@@ -19,3 +19,8 @@ export const getFlatCategories = async () => {
   const res = await fetch(`${ENV_SERVER.API_URL}/category/flat`);
   return res.json();
 };
+
+export const getAllProducts = async (query: URLSearchParams) => {
+  const res = await fetch(`${ENV_SERVER.API_URL}/product?${query.toString()}`);
+  return res.json();
+};

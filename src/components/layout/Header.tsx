@@ -1,7 +1,7 @@
 "use client";
 
 import { useCartContext } from "@/contexts/CartContext";
-import { Heart, MapPin, Menu, Search, ShoppingBag, X } from "lucide-react";
+import { Heart, Menu, Search, ShoppingBag, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -19,43 +19,46 @@ const Header = () => {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Shop", path: "/shop" },
-    { name: "Categories", path: "/categories" },
+    /* { name: "Categories", path: "/categories" }, */
     { name: "Track Order", path: "/track-order" },
   ];
 
   const isActive = (path: string) => location === path;
 
   return (
-    <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border">
+    <header className="sticky top-0 z-50 border-b bg-card/95 backdrop-blur-sm border-border">
       {/* Top bar */}
-      {/*  <div className="bg-primary text-primary-foreground py-2">
-        <div className="container-custom flex items-center justify-between text-sm">
+      {/*  <div className="py-2 bg-primary text-primary-foreground">
+        <div className="flex items-center justify-between text-sm container-custom">
           <div className="flex items-center gap-2">
             <MapPin size={14} />
             <span>Free Delivery in Dhaka on orders 2000+</span>
           </div>
-          <div className="hidden md:flex items-center gap-4">
+          <div className="items-center hidden gap-4 md:flex">
             <span>📞 01700-000000</span>
           </div>
         </div>
       </div> */}
 
       {/* Main header */}
-      <div className="container-custom py-4">
+      <div className="py-4 container-custom">
         <div className="flex items-center justify-between gap-4">
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
+          <Link href="/" className="flex items-center gap-1 md:gap-2 shrink-0">
             <Image
               width={100}
               height={100}
               src="/assets/logo.png"
               alt="Shajer Bati"
-              className="h-14 md:h-16 w-auto"
+              className="w-auto h-14 md:h-16"
             />
+            <span className="text-lg font-bold md:text-2xl text-primary">
+              সাঁঝের বাতি
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="items-center hidden gap-8 md:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -72,11 +75,11 @@ const Header = () => {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             {/* Search */}
             <button
               onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="p-2 rounded-full hover:bg-muted transition-colors"
+              className="p-2 transition-colors rounded-full hover:bg-muted"
               aria-label="Search"
             >
               <Search size={22} className="text-foreground" />
@@ -85,12 +88,12 @@ const Header = () => {
             {/* Favorites */}
             <Link
               href="/favorites"
-              className="p-2 rounded-full hover:bg-muted transition-colors relative"
+              className="relative p-2 transition-colors rounded-full hover:bg-muted"
               aria-label="Favorites"
             >
               <Heart size={22} className="text-foreground" />
               {favCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs w-5 h-5 rounded-full flex items-center justify-center font-semibold">
+                <span className="absolute flex items-center justify-center w-5 h-5 text-xs font-semibold rounded-full -top-1 -right-1 bg-accent text-accent-foreground">
                   {favCount}
                 </span>
               )}
@@ -99,12 +102,12 @@ const Header = () => {
             {/* Cart */}
             <Link
               href="/cart"
-              className="p-2 rounded-full hover:bg-muted transition-colors relative"
+              className="relative p-2 transition-colors rounded-full hover:bg-muted"
               aria-label="Cart"
             >
               <ShoppingBag size={22} className="text-foreground" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs w-5 h-5 rounded-full flex items-center justify-center font-semibold">
+                <span className="absolute flex items-center justify-center w-5 h-5 text-xs font-semibold rounded-full -top-1 -right-1 bg-primary text-primary-foreground">
                   {cartCount}
                 </span>
               )}
@@ -113,7 +116,7 @@ const Header = () => {
             {/* Mobile menu toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-full hover:bg-muted transition-colors md:hidden"
+              className="p-2 transition-colors rounded-full hover:bg-muted md:hidden"
               aria-label="Menu"
             >
               {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -128,10 +131,10 @@ const Header = () => {
               <input
                 type="text"
                 placeholder="Search products..."
-                className="input-field pr-12"
+                className="pr-12 input-field"
                 autoFocus
               />
-              <button className="absolute right-4 top-1/2 -translate-y-1/2">
+              <button className="absolute -translate-y-1/2 right-4 top-1/2">
                 <Search size={20} className="text-muted-foreground" />
               </button>
             </div>
@@ -141,8 +144,8 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <nav className="md:hidden border-t border-border animate-slide-down">
-          <div className="container-custom py-4 flex flex-col gap-4">
+        <nav className="border-t md:hidden border-border animate-slide-down">
+          <div className="flex flex-col gap-4 py-4 container-custom">
             {navLinks.map((link) => (
               <Link
                 key={link.path}

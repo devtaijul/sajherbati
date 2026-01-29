@@ -1,30 +1,21 @@
-"use client";
+import { getFlatCategories } from "@/actions/query.actions";
+import { ShopToolbarFilter } from "./ShopToolbarFilter";
+import { ShopToolbarOrder } from "./ShopToolbarOrder";
 
-import { ChevronDown } from "lucide-react";
-import React from "react";
-import GridToggle from "./GridToggle";
+export async function ShopToolbar() {
+  const data = await getFlatCategories();
 
-export const ShopToolbar = ({ selectedSort }: { selectedSort: string }) => {
+  if (!data) {
+    return null;
+  }
+
   return (
-    <div className="flex justify-between items-center mb-6">
-      <div className="relative">
-        <select
-          defaultValue={selectedSort}
-          onChange={(e) => {
-            "use client";
-            window.location.href = `/shop?sort=${e.target.value}`;
-          }}
-          className="border rounded px-4 py-2 pr-10"
-        >
-          <option value="default">Default</option>
-          <option value="price-low">Price: Low to High</option>
-          <option value="price-high">Price: High to Low</option>
-          <option value="newest">Newest</option>
-        </select>
-        <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2" />
-      </div>
+    <>
+      <div className="flex items-center justify-between gap-4 pb-6 mb-6 border-b">
+        <ShopToolbarFilter categories={data?.flatCategories} />
 
-      <GridToggle />
-    </div>
+        <ShopToolbarOrder />
+      </div>
+    </>
   );
-};
+}

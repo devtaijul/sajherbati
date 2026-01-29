@@ -11,12 +11,21 @@ export default async function page({
 }) {
   const queryParams = await searchParams;
   const query = queryParams?.query || "";
-  const currentPage = Number(queryParams?.page) || 1;
+  const currentPage = queryParams?.page || "1";
   const category = queryParams?.category || "";
 
   console.log("query", query);
   console.log("currentPage", currentPage);
   console.log("category", category);
 
-  return <ShopPage category={category} />;
+  return (
+    <ShopPage
+      searchParams={{
+        category: category,
+        limit: "20",
+        page: currentPage,
+        search: query,
+      }}
+    />
+  );
 }

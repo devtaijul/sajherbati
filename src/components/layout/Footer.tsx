@@ -6,31 +6,31 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="bg-primary text-primary-foreground">
-      <div className="container-custom py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="py-12 container-custom">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-4">
             <Image
               src={"/assets/logo.png"}
               alt="Shajer Bati"
-              className="h-20 w-auto bg-white rounded-full p-2"
+              className="w-auto h-20 p-2 bg-white rounded-full"
               width={100}
               height={100}
             />
-            <p className="text-primary-foreground/80 text-sm">
+            <p className="text-sm text-primary-foreground/80">
               Bangladesh&apos;s best traditional clothing collection. Premium
               quality at affordable prices.
             </p>
             <div className="flex gap-4">
               <a
                 href="#"
-                className="p-2 bg-primary-foreground/10 rounded-full hover:bg-primary-foreground/20 transition-colors"
+                className="p-2 transition-colors rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20"
               >
                 <Facebook size={20} />
               </a>
               <a
                 href="#"
-                className="p-2 bg-primary-foreground/10 rounded-full hover:bg-primary-foreground/20 transition-colors"
+                className="p-2 transition-colors rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20"
               >
                 <Instagram size={20} />
               </a>
@@ -39,14 +39,14 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-display text-lg font-semibold mb-4">
+            <h4 className="mb-4 text-lg font-semibold font-display">
               Quick Links
             </h4>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/shop"
-                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                  className="transition-colors text-primary-foreground/80 hover:text-primary-foreground"
                 >
                   Shop
                 </Link>
@@ -54,7 +54,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/categories"
-                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                  className="transition-colors text-primary-foreground/80 hover:text-primary-foreground"
                 >
                   Categories
                 </Link>
@@ -62,7 +62,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/track-order"
-                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                  className="transition-colors text-primary-foreground/80 hover:text-primary-foreground"
                 >
                   Track Order
                 </Link>
@@ -70,7 +70,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/favorites"
-                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                  className="transition-colors text-primary-foreground/80 hover:text-primary-foreground"
                 >
                   Favorites
                 </Link>
@@ -80,14 +80,14 @@ const Footer = () => {
 
           {/* Categories */}
           <div>
-            <h4 className="font-display text-lg font-semibold mb-4">
+            <h4 className="mb-4 text-lg font-semibold font-display">
               Categories
             </h4>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/shop?category=three-piece"
-                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                  className="transition-colors text-primary-foreground/80 hover:text-primary-foreground"
                 >
                   Three Piece
                 </Link>
@@ -95,7 +95,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/shop?category=salwar-kameez"
-                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                  className="transition-colors text-primary-foreground/80 hover:text-primary-foreground"
                 >
                   Salwar Kameez
                 </Link>
@@ -103,7 +103,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/shop?category=kurti"
-                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                  className="transition-colors text-primary-foreground/80 hover:text-primary-foreground"
                 >
                   Kurti
                 </Link>
@@ -111,7 +111,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/shop?category=saree"
-                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                  className="transition-colors text-primary-foreground/80 hover:text-primary-foreground"
                 >
                   Saree
                 </Link>
@@ -121,24 +121,24 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="font-display text-lg font-semibold mb-4">Contact</h4>
+            <h4 className="mb-4 text-lg font-semibold font-display">Contact</h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="flex-shrink-0 mt-0.5" />
-                <span className="text-primary-foreground/80 text-sm">
-                  Mirpur-10, Dhaka-1216, Bangladesh
+                <span className="text-sm text-primary-foreground/80">
+                  Khilkhet, Dhaka, Bangladesh
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={18} className="flex-shrink-0" />
-                <span className="text-primary-foreground/80 text-sm">
-                  01700-000000
+                <span className="text-sm text-primary-foreground/80">
+                  01620615021
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={18} className="flex-shrink-0" />
-                <span className="text-primary-foreground/80 text-sm">
-                  info@shajerbati.com
+                <span className="text-sm text-primary-foreground/80">
+                  yhmiraz12@gmail.com
                 </span>
               </li>
             </ul>
@@ -146,9 +146,9 @@ const Footer = () => {
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-primary-foreground/20">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-primary-foreground/60 text-sm">
+        <div className="pt-8 mt-12 border-t border-primary-foreground/20">
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+            <p className="text-sm text-primary-foreground/60">
               © 2026 Shajer Bati. All rights reserved.
             </p>
             <div className="flex items-center gap-4 text-sm text-primary-foreground/60">

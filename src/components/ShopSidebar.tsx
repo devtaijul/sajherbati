@@ -1,5 +1,5 @@
 import { getFlatCategories } from "@/actions/query.actions";
-import { Category } from "@/types/product";
+import { CategorySidebarClient } from "./CategorySidebarClient";
 
 export const ShopSidebar = async ({
   category_slug,
@@ -18,8 +18,6 @@ export const ShopSidebar = async ({
     );
   }
 
-  console.log("categories", result);
-
   if (result.flatCategories.length === 0) {
     return (
       <div>
@@ -36,30 +34,10 @@ export const ShopSidebar = async ({
           <h3 className="mb-4 text-lg font-semibold font-display">
             Categories
           </h3>
-          <div className="space-y-2">
-            <button
-              className={`block w-full text-left px-3 py-2 rounded-lg transition-colors ${
-                selectedCategory === "all"
-                  ? "bg-primary text-primary-foreground"
-                  : "hover:bg-muted"
-              }`}
-            >
-              All Categories
-            </button>
-
-            {result.flatCategories.map((cat: Category) => (
-              <button
-                key={cat.id}
-                className={`block w-full text-left px-3 py-2 rounded-lg transition-colors ${
-                  selectedCategory === cat.slug
-                    ? "bg-primary text-primary-foreground"
-                    : "hover:bg-muted"
-                }`}
-              >
-                {cat.title}
-              </button>
-            ))}
-          </div>
+          <CategorySidebarClient
+            categories={result.flatCategories}
+            selectedCategory={selectedCategory}
+          />
         </div>
       </div>
     </aside>
