@@ -1,6 +1,7 @@
-import { Cart } from "@/pages/Cart";
-import React from "react";
+import { Cart } from "@/components/pages/Cart";
 
-export default function page() {
+const page = () => {
   return <Cart />;
-}
+};
+
+export default page;

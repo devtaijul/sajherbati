@@ -2,7 +2,7 @@ import { createOrder } from "@/actions/mutation.actions";
 import { useCartContext } from "@/contexts/CartContext";
 import { deliveryAreas } from "@/data/products";
 import { useAsyncAction } from "@/hooks/use-async-action";
-import { OrderItems, PaymentMethod } from "@/types/product";
+import { Order, OrderItems, PaymentMethod } from "@/types/product";
 import { OrderFormValues, orderSchema } from "@/utils/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
@@ -11,11 +11,11 @@ import { useRouter } from "next/navigation";
 import { useForm, useWatch } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Button } from "./ui/button";
+import { PAGES } from "@/config/page";
 
 export const OrderForm = () => {
-  const navigate = useRouter();
+  const router = useRouter();
   const { cartItems, getCartTotal, clearCart } = useCartContext();
-  console.log("cartItems", cartItems);
 
   const {
     register,
@@ -35,10 +35,11 @@ export const OrderForm = () => {
   });
 
   const { isProcessing, runAction } = useAsyncAction(createOrder, {
-    onSuccess: () => {
+    onSuccess: (data: { success: boolean; message: string; data: Order }) => {
       toast.success("Order created successfully");
       clearCart();
       reset();
+      router.push(PAGES.ORDER_SUCCESS(data.data.id));
     },
     onError: () => {
       toast.error("Something went wrong");
@@ -66,11 +67,11 @@ export const OrderForm = () => {
   if (cartItems.length === 0) {
     return (
       <main className="py-16">
-        <div className="container-custom text-center">
-          <h1 className="text-2xl font-display font-bold mb-2">
+        <div className="text-center container-custom">
+          <h1 className="mb-2 text-2xl font-bold font-display">
             Cart is Empty
           </h1>
-          <p className="text-muted-foreground mb-6">
+          <p className="mb-6 text-muted-foreground">
             Please add some products to your cart before checkout
           </p>
           <Link href="/shop">
@@ -102,11 +103,11 @@ export const OrderForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {/* Form Fields */}
-        <div className="lg:col-span-2 space-y-6">
-          <div className="bg-card rounded-xl border border-border p-6">
-            <h2 className="font-display font-semibold text-xl mb-6">
+        <div className="space-y-6 lg:col-span-2">
+          <div className="p-6 border bg-card rounded-xl border-border">
+            <h2 className="mb-6 text-xl font-semibold font-display">
               Delivery Information
             </h2>
 
@@ -114,13 +115,13 @@ export const OrderForm = () => {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium mb-2"
+                  className="block mb-2 text-sm font-medium"
                 >
                   Your Name *
                 </label>
                 <input {...register("name")} className="input-field" />
                 {errors.name && (
-                  <p className="text-sm text-red-500 mt-1">
+                  <p className="mt-1 text-sm text-red-500">
                     {errors.name.message}
                   </p>
                 )}
@@ -129,7 +130,7 @@ export const OrderForm = () => {
               <div>
                 <label
                   htmlFor="phone"
-                  className="block text-sm font-medium mb-2"
+                  className="block mb-2 text-sm font-medium"
                 >
                   Mobile Number *
                 </label>
@@ -139,7 +140,7 @@ export const OrderForm = () => {
                   className="input-field"
                 />
                 {errors.phone && (
-                  <p className="text-sm text-red-500 mt-1">
+                  <p className="mt-1 text-sm text-red-500">
                     {errors.phone.message}
                   </p>
                 )}
@@ -148,17 +149,17 @@ export const OrderForm = () => {
               <div>
                 <label
                   htmlFor="address"
-                  className="block text-sm font-medium mb-2"
+                  className="block mb-2 text-sm font-medium"
                 >
                   Full Address *
                 </label>
                 <textarea
                   {...register("address")}
                   rows={3}
-                  className="input-field resize-none"
+                  className="resize-none input-field"
                 />
                 {errors.address && (
-                  <p className="text-sm text-red-500 mt-1">
+                  <p className="mt-1 text-sm text-red-500">
                     {errors.address.message}
                   </p>
                 )}
@@ -167,7 +168,7 @@ export const OrderForm = () => {
               <div>
                 <label
                   htmlFor="deliveryArea"
-                  className="block text-sm font-medium mb-2"
+                  className="block mb-2 text-sm font-medium"
                 >
                   Delivery Area *
                 </label>
@@ -180,7 +181,7 @@ export const OrderForm = () => {
                   ))}
                 </select>
                 {errors.deliveryArea && (
-                  <p className="text-sm text-red-500 mt-1">
+                  <p className="mt-1 text-sm text-red-500">
                     {errors.deliveryArea.message}
                   </p>
                 )}
@@ -189,22 +190,22 @@ export const OrderForm = () => {
               <div>
                 <label
                   htmlFor="note"
-                  className="block text-sm font-medium mb-2"
+                  className="block mb-2 text-sm font-medium"
                 >
                   Note (Optional)
                 </label>
                 <textarea
                   {...register("note")}
                   rows={3}
-                  className="input-field resize-none"
+                  className="resize-none input-field"
                 />
               </div>
             </div>
           </div>
 
           {/* Order Items Preview */}
-          <div className="bg-card rounded-xl border border-border p-6">
-            <h2 className="font-display font-semibold text-xl mb-4">
+          <div className="p-6 border bg-card rounded-xl border-border">
+            <h2 className="mb-4 text-xl font-semibold font-display">
               Order Items ({cartItems.length})
             </h2>
             <div className="space-y-3">
@@ -213,12 +214,12 @@ export const OrderForm = () => {
                   <Image
                     src={item.image}
                     alt={item.title}
-                    className="w-14 h-16 object-cover rounded"
+                    className="object-cover h-16 rounded w-14"
                     width={56}
                     height={56}
                   />
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm line-clamp-1">
+                    <p className="text-sm font-medium line-clamp-1">
                       {item.title}
                     </p>
                     <p className="text-xs text-muted-foreground">
@@ -234,12 +235,12 @@ export const OrderForm = () => {
 
         {/* Order Summary */}
         <div className="lg:col-span-1">
-          <div className="sticky top-32 bg-card rounded-xl border border-border p-6">
-            <h2 className="font-display font-semibold text-xl mb-6">
+          <div className="sticky p-6 border top-32 bg-card rounded-xl border-border">
+            <h2 className="mb-6 text-xl font-semibold font-display">
               Order Summary
             </h2>
 
-            <div className="space-y-3 pb-4 border-b border-border">
+            <div className="pb-4 space-y-3 border-b border-border">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Subtotal</span>
                 <span className="font-medium">৳{subtotal}</span>
@@ -257,7 +258,7 @@ export const OrderForm = () => {
               <span className="text-accent">৳{total}</span>
             </div>
 
-            <div className="bg-secondary/30 rounded-lg p-3 mb-4">
+            <div className="p-3 mb-4 rounded-lg bg-secondary/30">
               <p className="text-sm text-center">💰 Cash on Delivery</p>
             </div>
 
@@ -265,7 +266,7 @@ export const OrderForm = () => {
               type="submit"
               size="lg"
               disabled={isProcessing}
-              className="btn-primary w-full"
+              className="w-full btn-primary"
             >
               {isProcessing ? "Placing Order..." : "Confirm Order"}
             </Button>

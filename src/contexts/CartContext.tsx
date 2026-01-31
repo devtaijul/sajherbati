@@ -1,10 +1,9 @@
 "use client";
 
-import React, { createContext, useContext, ReactNode } from "react";
 import { useCart } from "@/hooks/useCart";
 import { useFavorites } from "@/hooks/useFavorites";
-import { useOrders } from "@/hooks/useOrders";
-import { CartItem, Order } from "@/types/product";
+import { CartItem } from "@/types/product";
+import React, { createContext, ReactNode, useContext } from "react";
 
 interface CartContextType {
   // Cart
@@ -23,18 +22,6 @@ interface CartContextType {
   getFavoritesCount: () => number;
 
   // Orders
-  orders: Order[];
-  createOrder: (
-    customerName: string,
-    customerPhone: string,
-    customerAddress: string,
-    deliveryArea: string,
-    note: string,
-    items: CartItem[],
-    deliveryCharge: number,
-  ) => Order;
-  getOrderByTracking: (trackingNumber: string) => Order | undefined;
-  getOrdersByPhone: (phone: string) => Order[];
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -44,7 +31,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const cart = useCart();
   const favorites = useFavorites();
-  const orders = useOrders();
 
   const value: CartContextType = {
     // Cart
@@ -61,12 +47,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     toggleFavorite: favorites.toggleFavorite,
     isFavorite: favorites.isFavorite,
     getFavoritesCount: favorites.getFavoritesCount,
-
-    // Orders
-    orders: orders.orders,
-    createOrder: orders.createOrder,
-    getOrderByTracking: orders.getOrderByTracking,
-    getOrdersByPhone: orders.getOrdersByPhone,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

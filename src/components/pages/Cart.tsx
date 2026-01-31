@@ -4,6 +4,8 @@ import { Trash2, Minus, Plus, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCartContext } from "@/contexts/CartContext";
 import Link from "next/link";
+import Image from "next/image";
+import { PAGES } from "@/config/page";
 
 export const Cart = () => {
   const { cartItems, updateQuantity, removeFromCart, getCartTotal } =
@@ -13,15 +15,15 @@ export const Cart = () => {
   if (cartItems.length === 0) {
     return (
       <main className="py-16">
-        <div className="container-custom text-center">
+        <div className="text-center container-custom">
           <ShoppingBag
             size={64}
-            className="mx-auto text-muted-foreground mb-4"
+            className="mx-auto mb-4 text-muted-foreground"
           />
-          <h1 className="text-2xl font-display font-bold mb-2">
+          <h1 className="mb-2 text-2xl font-bold font-display">
             Your Cart is Empty
           </h1>
-          <p className="text-muted-foreground mb-6">
+          <p className="mb-6 text-muted-foreground">
             Add some beautiful products to your cart
           </p>
           <Link href="/shop">
@@ -35,31 +37,33 @@ export const Cart = () => {
   return (
     <main className="py-8 md:py-12">
       <div className="container-custom">
-        <h1 className="text-3xl font-display font-bold mb-8">Shopping Cart</h1>
+        <h1 className="mb-8 text-3xl font-bold font-display">Shopping Cart</h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Cart Items */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="space-y-4 lg:col-span-2">
             {cartItems.map((item) => (
               <div
                 key={item.id}
-                className="flex gap-4 p-4 bg-card rounded-xl border border-border"
+                className="flex gap-4 p-4 border bg-card rounded-xl border-border"
               >
-                <img
+                <Image
                   src={item.image}
                   alt={item.title}
-                  className="w-24 h-28 object-cover rounded-lg"
+                  className="object-cover w-24 rounded-lg h-28"
+                  width={100}
+                  height={100}
                 />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2">
                     <div>
                       <Link
-                        href={`/product/${item.productId}`}
-                        className="font-medium hover:text-primary transition-colors line-clamp-1"
+                        href={PAGES.PRODUCT.VIEW(item.productId)}
+                        className="font-medium transition-colors hover:text-primary line-clamp-1"
                       >
                         {item.title}
                       </Link>
-                      <p className="text-sm text-muted-foreground mt-1">
+                      <p className="mt-1 text-sm text-muted-foreground">
                         Size: {item.size} |{" "}
                         {item.stitchType === "STITCH"
                           ? "Stitched"
@@ -68,7 +72,7 @@ export const Cart = () => {
                     </div>
                     <button
                       onClick={() => removeFromCart(item.id)}
-                      className="p-2 text-muted-foreground hover:text-destructive transition-colors"
+                      className="p-2 transition-colors text-muted-foreground hover:text-destructive"
                     >
                       <Trash2 size={18} />
                     </button>
@@ -80,18 +84,18 @@ export const Cart = () => {
                         onClick={() =>
                           updateQuantity(item.id, item.quantity - 1)
                         }
-                        className="p-1 border border-border rounded hover:bg-muted transition-colors"
+                        className="p-1 transition-colors border rounded border-border hover:bg-muted"
                       >
                         <Minus size={16} />
                       </button>
-                      <span className="w-8 text-center font-medium">
+                      <span className="w-8 font-medium text-center">
                         {item.quantity}
                       </span>
                       <button
                         onClick={() =>
                           updateQuantity(item.id, item.quantity + 1)
                         }
-                        className="p-1 border border-border rounded hover:bg-muted transition-colors"
+                        className="p-1 transition-colors border rounded border-border hover:bg-muted"
                       >
                         <Plus size={16} />
                       </button>
@@ -100,8 +104,8 @@ export const Cart = () => {
                       <p className="font-bold text-accent">
                         ৳{item.price * item.quantity}
                       </p>
-                      {item.regularPrice > item.price && (
-                        <p className="text-sm text-muted-foreground line-through">
+                      {item?.regularPrice && item.regularPrice > item.price && (
+                        <p className="text-sm line-through text-muted-foreground">
                           ৳{item.regularPrice * item.quantity}
                         </p>
                       )}
@@ -114,12 +118,12 @@ export const Cart = () => {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="sticky top-32 bg-card rounded-xl border border-border p-6">
-              <h2 className="font-display font-semibold text-xl mb-6">
+            <div className="sticky p-6 border top-32 bg-card rounded-xl border-border">
+              <h2 className="mb-6 text-xl font-semibold font-display">
                 Order Summary
               </h2>
 
-              <div className="space-y-3 pb-4 border-b border-border">
+              <div className="pb-4 space-y-3 border-b border-border">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Subtotal</span>
                   <span className="font-medium">৳{total}</span>
@@ -138,14 +142,14 @@ export const Cart = () => {
               </div>
 
               <Link href="/checkout" className="block">
-                <Button size="lg" className="btn-primary w-full">
+                <Button size="lg" className="w-full btn-primary">
                   Proceed to Checkout
                 </Button>
               </Link>
 
               <Link
                 href="/shop"
-                className="block text-center text-primary hover:underline mt-4"
+                className="block mt-4 text-center text-primary hover:underline"
               >
                 Continue Shopping
               </Link>

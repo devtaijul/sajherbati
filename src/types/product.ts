@@ -125,6 +125,7 @@ export interface CartItem {
   price: number;
   size: string;
   quantity: number;
+  regularPrice?: number;
   image: string;
   stitchType: "STITCH" | "UNSTITCH";
 }

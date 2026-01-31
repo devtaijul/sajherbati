@@ -1,4 +1,4 @@
-import Favorites from "@/pages/Favorites";
+import Favorites from "@/components/pages/Favorites";
 import React from "react";
 
 const page = () => {

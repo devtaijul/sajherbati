@@ -1,4 +1,4 @@
-import TrackOrder from "@/pages/TrackOrder";
+import TrackOrder from "@/components/pages/TrackOrder";
 import React from "react";
 
 const page = () => {

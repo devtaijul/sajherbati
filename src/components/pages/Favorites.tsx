@@ -1,25 +1,20 @@
 "use client";
 
-import { Heart } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import ProductCard from "@/components/product/ProductCard";
 import { useCartContext } from "@/contexts/CartContext";
-import { products } from "@/data/products";
-import Link from "next/link";
 
 const Favorites = () => {
   const { favorites } = useCartContext();
-  const favoriteProducts = products.filter((p) => favorites.includes(p.id));
+  return null;
 
-  if (favoriteProducts.length === 0) {
+  /* if (favoriteProducts.length === 0) {
     return (
       <main className="py-16">
-        <div className="container-custom text-center">
-          <Heart size={64} className="mx-auto text-muted-foreground mb-4" />
-          <h1 className="text-2xl font-display font-bold mb-2">
+        <div className="text-center container-custom">
+          <Heart size={64} className="mx-auto mb-4 text-muted-foreground" />
+          <h1 className="mb-2 text-2xl font-bold font-display">
             No Favorite Products
           </h1>
-          <p className="text-muted-foreground mb-6">
+          <p className="mb-6 text-muted-foreground">
             Click on the heart icon to save your favorite products
           </p>
           <Link href="/shop">
@@ -28,16 +23,16 @@ const Favorites = () => {
         </div>
       </main>
     );
-  }
+  } */
 
-  return (
+  /* return (
     <main className="py-8 md:py-12">
       <div className="container-custom">
-        <h1 className="text-3xl font-display font-bold mb-8">
+        <h1 className="mb-8 text-3xl font-bold font-display">
           Favorite Products ({favoriteProducts.length})
         </h1>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 md:gap-6">
           {favoriteProducts.map((product, index) => (
             <div
               key={product.id}
@@ -50,7 +45,7 @@ const Favorites = () => {
         </div>
       </div>
     </main>
-  );
+  ); */
 };
 
 export default Favorites;

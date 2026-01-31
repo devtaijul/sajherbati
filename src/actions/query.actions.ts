@@ -24,3 +24,8 @@ export const getAllProducts = async (query: URLSearchParams) => {
   const res = await fetch(`${ENV_SERVER.API_URL}/product?${query.toString()}`);
   return res.json();
 };
+
+export const getOrderById = async (id: string) => {
+  const res = await fetch(`${ENV_SERVER.API_URL}/order/${id}`);
+  return res.json();
+};

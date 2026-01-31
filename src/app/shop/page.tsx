@@ -1,4 +1,4 @@
-import ShopPage from "@/pages/Shop";
+import ShopPage from "@/components/pages/Shop";
 
 export default async function page({
   searchParams,
@@ -13,10 +13,6 @@ export default async function page({
   const query = queryParams?.query || "";
   const currentPage = queryParams?.page || "1";
   const category = queryParams?.category || "";
-
-  console.log("query", query);
-  console.log("currentPage", currentPage);
-  console.log("category", category);
 
   return (
     <ShopPage
