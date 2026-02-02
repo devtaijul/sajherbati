@@ -124,19 +124,19 @@ const Footer = () => {
             <h4 className="mb-4 text-lg font-semibold font-display">Contact</h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
-                <MapPin size={18} className="flex-shrink-0 mt-0.5" />
+                <MapPin size={18} className="shrink-0 mt-0.5" />
                 <span className="text-sm text-primary-foreground/80">
                   Khilkhet, Dhaka, Bangladesh
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone size={18} className="flex-shrink-0" />
+                <Phone size={18} className="shrink-0" />
                 <span className="text-sm text-primary-foreground/80">
                   01620615021
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Mail size={18} className="flex-shrink-0" />
+                <Mail size={18} className="shrink-0" />
                 <span className="text-sm text-primary-foreground/80">
                   yhmiraz12@gmail.com
                 </span>

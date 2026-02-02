@@ -41,7 +41,7 @@ const Header = () => {
       </div> */}
 
       {/* Main header */}
-      <div className="py-4 container-custom">
+      <div className="py-4  container-custom">
         <div className="flex items-center justify-between gap-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-1 md:gap-2 shrink-0">

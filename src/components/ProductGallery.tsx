@@ -10,17 +10,17 @@ export default function ProductGallery({ product }: { product: Product }) {
   const images = [
     product.featuredImage,
     ...product.galleryImages.filter(
-      (img: Media) => img.id !== product.featuredImage.id,
+      (img: Media) => img.id !== product.featuredImage?.id,
     ),
   ];
 
   return (
     <div className="space-y-4">
-      <div className="aspect-3/4 rounded-xl overflow-hidden bg-muted">
+      <div className="overflow-hidden aspect-3/4 rounded-xl bg-muted">
         <Image
-          src={images[selectedImage].url}
+          src={images[selectedImage]?.url}
           alt={product.title}
-          className="w-full h-full object-cover"
+          className="object-cover w-full h-full"
           width={500}
           height={500}
         />
@@ -29,7 +29,7 @@ export default function ProductGallery({ product }: { product: Product }) {
       <div className="flex gap-3 overflow-x-auto">
         {images.map((img: Media, i: number) => (
           <button
-            key={img.id}
+            key={img?.id}
             onClick={() => setSelectedImage(i)}
             className={`w-20 h-24 border-2 rounded-lg ${
               selectedImage === i ? "border-primary" : "border-transparent"
@@ -37,8 +37,8 @@ export default function ProductGallery({ product }: { product: Product }) {
           >
             <Image
               alt={product.title}
-              src={img.url}
-              className="w-full h-full object-cover"
+              src={img?.url}
+              className="object-cover w-full h-full"
               width={500}
               height={500}
             />
