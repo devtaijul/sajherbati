@@ -5,7 +5,7 @@ import { TopSellsProductServer } from "@/components/server/TopSellsProductServer
 import ProductSectionSkeleton from "@/components/skeleton/ProductSectionSkeleton";
 import { Suspense } from "react";
 
-export const Home = () => {
+export const Home = async () => {
   return (
     <main>
       <HeroSlider />
@@ -25,40 +25,40 @@ export const Home = () => {
       {/* Features Section */}
       <section className="py-12 md:py-16 bg-primary text-primary-foreground">
         <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
             <div className="text-center">
-              <div className="text-4xl mb-3">🚚</div>
-              <h3 className="font-display font-semibold text-lg">
+              <div className="mb-3 text-4xl">🚚</div>
+              <h3 className="text-lg font-semibold font-display">
                 Fast Delivery
               </h3>
-              <p className="text-primary-foreground/70 text-sm mt-1">
+              <p className="mt-1 text-sm text-primary-foreground/70">
                 Nationwide Delivery
               </p>
             </div>
             <div className="text-center">
-              <div className="text-4xl mb-3">💰</div>
-              <h3 className="font-display font-semibold text-lg">
+              <div className="mb-3 text-4xl">💰</div>
+              <h3 className="text-lg font-semibold font-display">
                 Cash on Delivery
               </h3>
-              <p className="text-primary-foreground/70 text-sm mt-1">
+              <p className="mt-1 text-sm text-primary-foreground/70">
                 Pay when you receive
               </p>
             </div>
             <div className="text-center">
-              <div className="text-4xl mb-3">✨</div>
-              <h3 className="font-display font-semibold text-lg">
+              <div className="mb-3 text-4xl">✨</div>
+              <h3 className="text-lg font-semibold font-display">
                 Premium Quality
               </h3>
-              <p className="text-primary-foreground/70 text-sm mt-1">
+              <p className="mt-1 text-sm text-primary-foreground/70">
                 100% Original Products
               </p>
             </div>
             <div className="text-center">
-              <div className="text-4xl mb-3">🔄</div>
-              <h3 className="font-display font-semibold text-lg">
+              <div className="mb-3 text-4xl">🔄</div>
+              <h3 className="text-lg font-semibold font-display">
                 Easy Returns
               </h3>
-              <p className="text-primary-foreground/70 text-sm mt-1">
+              <p className="mt-1 text-sm text-primary-foreground/70">
                 7 Days Return Policy
               </p>
             </div>

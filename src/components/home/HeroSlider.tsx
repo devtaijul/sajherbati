@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const slides = [
   {
@@ -49,27 +50,29 @@ const HeroSlider = () => {
             index === currentSlide ? "opacity-100" : "opacity-0"
           }`}
         >
-          <img
+          <Image
             src={slide.image}
             alt={slide.title}
-            className="w-full h-full object-cover"
+            className="object-cover w-full h-full"
+            width={500}
+            height={500}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/50 to-transparent" />
 
           <div className="absolute inset-0 flex items-center">
             <div className="container-custom">
               <div className="max-w-lg space-y-4 md:space-y-6">
-                <span className="inline-block px-4 py-1 bg-secondary text-secondary-foreground text-sm font-medium rounded-full">
+                <span className="inline-block px-4 py-1 text-sm font-medium rounded-full bg-secondary text-secondary-foreground">
                   New Arrival
                 </span>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground">
+                <h1 className="text-4xl font-bold md:text-5xl lg:text-6xl font-display text-foreground">
                   {slide.title}
                 </h1>
                 <p className="text-lg md:text-xl text-muted-foreground">
                   {slide.subtitle}
                 </p>
                 <Link href={slide.link}>
-                  <Button size="lg" className="btn-primary text-lg px-8">
+                  <Button size="lg" className="px-8 text-lg btn-primary">
                     {slide.cta}
                   </Button>
                 </Link>
@@ -82,21 +85,21 @@ const HeroSlider = () => {
       {/* Navigation arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-card/80 hover:bg-card rounded-full shadow-lg transition-all"
+        className="absolute p-3 transition-all -translate-y-1/2 rounded-full shadow-lg left-4 top-1/2 bg-card/80 hover:bg-card"
         aria-label="Previous slide"
       >
         <ChevronLeft size={24} className="text-foreground" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-card/80 hover:bg-card rounded-full shadow-lg transition-all"
+        className="absolute p-3 transition-all -translate-y-1/2 rounded-full shadow-lg right-4 top-1/2 bg-card/80 hover:bg-card"
         aria-label="Next slide"
       >
         <ChevronRight size={24} className="text-foreground" />
       </button>
 
       {/* Dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+      <div className="absolute flex gap-2 -translate-x-1/2 bottom-6 left-1/2">
         {slides.map((_, index) => (
           <button
             key={index}
